@@ -1,0 +1,6 @@
+book_filename: "seminario"
+output_dir: "../"
+language:
+  ui:
+    chapter_name: ""
+delete_merged_file: true

@@ -1,0 +1,20 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: "none"
+  includes:
+    in_header: fonts.html
+    after_body: scripts.html
+  config:
+    toc:
+      before: |
+        <li><a href='https://www.ufrgs.br/ime/' id='logo-sumario'><img src='./bookdown/images/logo.png' style='width:50%;display:block;margin-left:auto;margin-right:auto;'/></a></li>
+      after: |
+        <li>
+          <a id="tag-titulo-2" style="text-align:center;position:relative;left:50%;bottom:2px;transform:translate(-50%);margin: 0 auto;">19 de dezembro de 2019</a>
+        </li>
+    download: ["pdf", "epub"]
+    sharing:
+      github: yes
+      facebook: no
+      twitter: yes
+      all: ['twitter', 'github']

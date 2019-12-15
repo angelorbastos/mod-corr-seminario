@@ -1,0 +1,43 @@
+/* Adicionando logo do IME após todos títulos:  */
+h1 {
+  position: relative !important;
+  color: #003050;
+  border-bottom: 2px dotted #094978;
+}
+
+h1::after {
+  margin-left: -100px;
+  position: absolute;
+  height: 55px;
+  width: 55px;
+  content: ' ';
+  left: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  right: -50px;
+  background-image: url('images/logo.png');
+}
+
+/* Retirando o logo do IME da capa, utilizando a tag que botei nos títulos de lá: */
+#h1-capa {
+  border-bottom: none !important;
+  color: #DCF3FF;
+}
+
+#h1-capa::after {
+  background-image: none !important;
+}
+
+/* Alterando a cor de fundo da capa: */
+.remark-slide-container .title-slide {
+  background-image: url('images/bg.png');
+  color: #DCF3FF;
+  text-shadow: 2px 0 0 #003050;
+}
+
+/* Alterando a fonte do corpo dos slides: */
+body {
+  font-family: 'Biryani', serif;
+  color: #001C30;
+}

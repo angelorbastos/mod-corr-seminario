@@ -1,0 +1,301 @@
+/* Aumentando o tamanho da página horizontalmente: */
+.book .book-body .page-wrapper .page-inner {
+  max-width: 90%;
+}
+
+/* Mudando a cor do background do summary: */
+.book .book-summary {
+  background-image: linear-gradient(to top, #094978, #0d5688, #116397, #1470a7, #167eb7, #1687c2, #1590ce, #1499d9, #119fe2, #0ca5ec, #06acf5, #00b2ff);
+}
+
+/* Mudando a cor do texto do summary: */
+.book .book-summary ul.summary li a, .book .book-summary ul.summary li span {
+  color: #F2FAFF;
+  font-family: 'Arvo', serif;
+}
+
+/* Mudando a cor do background do header: */
+.book .book-header{
+  background-image: linear-gradient(to left, #094978, #0d5688, #116397, #1470a7, #167eb7, #1687c2, #1590ce, #1499d9, #119fe2, #0ca5ec, #06acf5, #00b2ff);
+}
+
+/* Mudando a cor dos botões do header: */
+.book .book-header .btn {
+  color: #F2FAFF;
+  position:relative;
+  transition: all 0.275s ease-out;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.book .book-header .btn:hover {
+  -webkit-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+  color: white !important;
+}
+
+.fa-align-justify:hover {
+  -webkit-transform: none !important;
+  transform: none !important;
+}
+
+.fa-twitter:hover {
+  color: #00ACEE !important;
+}
+
+.fa-github:hover {
+  color: #333 !important;
+}
+
+/* Adicionando imagem de fundo no corpo do relatório: */
+.book .book-body {
+  background: url(./bookdown/images/logo_fundo.png) no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Deixando as caixas de texto do corpo transparentes, pra aparecer o background: */
+.book .book-body .page-wrapper .page-inner .normal {
+  background:transparent;
+}
+
+/* Mudando a cor dos textos no corpo do relatório: */
+.book .book-body .page-wrapper .page-inner section.normal {
+  color: #00315D;
+  text-align: justify;
+}
+
+/* Alinhando os h1 (títulos) no centro: */
+.book .book-body .page-wrapper .page-inner section.normal h1 {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h2 {
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h3 {
+  text-align: left;
+  font-family: 'Abel', sans-serif;
+}
+
+/* Alinhando os textos justificados: */
+.book .book-body .page-wrapper .page-inner section.normal p {
+  text-align: justify;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* Mudando a cor do texto no header: */
+.book .book-header h1 a, .book .book-header h1 a:hover {
+  color: #F2FAFF;
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* Mudando animações de hover do sumário: */
+.book .book-summary ul.summary li a:hover, .book .book-summary ul.summary li.active>a {
+  color: #F2FAFF !important;
+}
+
+.book .book-summary ul.summary li a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #f8fdff, #F2FAFF);
+  transition: width .3s;
+}
+
+.book .book-summary ul.summary li a:hover::after {
+  width: 100%;
+  transition: width .3s;
+}
+
+/* Configurando a fonte do summary no hover: */
+.book .book-summary ul.summary li a:hover{
+  text-shadow: 0 0 3px #F2FAFF, 0 0 5px #F2FAFF;
+}
+
+/* Modificando separadamente as coisas antes e depois do summary: */
+#logo-sumario:hover, #tag-titulo-1:hover, #tag-titulo-2:hover{
+  text-shadow: none !important;
+}
+
+#logo-sumario:hover::after, #tag-titulo-1:hover::after, #tag-titulo-2:hover::after {
+  width:0;
+}
+
+#tag-titulo-1:hover {
+  font-size: 115%;  
+}
+
+/* Configurando o item atual (já o forcei a ser branco lá em cima): */
+.book .book-summary ul.summary li.active>a {
+  font-size: 19px;
+}    
+
+.book .book-summary ul.summary li.active>a::after{
+  width: 100%;
+}
+
+/* Alinhando os itens do summary verticalmente: */
+.book .book-summary ul.summary li i:hover, .book .book-summary ul.summary li i {
+  vertical-align: middle;
+}
+
+/* Mudando a cor do menu dropdown: */
+.dropdown-menu {
+  background-image: linear-gradient(to left top, #094978, #0d5688, #116397, #1470a7, #167eb7, #1687c2, #1590ce, #1499d9, #119fe2, #0ca5ec, #06acf5, #00b2ff);
+}
+
+/* Mudando a cor da fonte do menu dropdown: */
+.dropdown-menu .buttons .button {
+  color: #F2FAFF;
+  font-family: 'Arvo', serif;
+}
+
+.dropdown-menu .buttons .button:hover {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+/* Mudando a cor da setinha que aparece no header quando o menu aparece: */
+.dropdown-menu .dropdown-caret .caret-inner {
+  border-bottom: 9px solid #094978;
+}
+
+/* Mudando as cores das setas de navegação: */
+.book .book-body .navigation {
+  color: #b1daff;
+}
+
+.book .book-body .navigation:hover {
+  color: #094978;
+}
+
+/* Mudando a cor dos textos em listas: */
+.book .book-body .page-wrapper .page-inner section.normal li{
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: justify;
+}
+
+/*******************************************/
+/* Formats para as TABELAS (package 'DT'): */
+/*******************************************/
+/* Formatando os botões de paginação: */
+.dataTables_wrapper .dataTables_paginate {
+  color: #094978 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background-image: linear-gradient(to left top, #094978, #0d5688, #116397, #1470a7, #167eb7, #1687c2, #1590ce, #1499d9, #119fe2, #0ca5ec, #06acf5, #00b2ff) !important;
+  font-family: 'Arvo', serif;
+  color: #FFEEE0 !important;
+  border: 1px solid #b1daff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  font-weight: bold;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+  color: #094978 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  color: #b1daff !important;
+}
+
+div.dt-button-collection {
+  background-color: #F2FAFF !important;
+  border: 1px solid #b1daff !important;
+}
+
+/* Formatando os botões de cima: */
+button.dt-button, div.dt-button, a.dt-button {
+  border: 1px solid #b1daff !important;
+  background-image: linear-gradient(to left top, #094978, #0d5688, #116397, #1470a7, #167eb7, #1687c2, #1590ce, #1499d9, #119fe2, #0ca5ec, #06acf5, #00b2ff) !important;
+  color: #FFEEE0 !important;
+  font-family: 'Arvo', serif !important;
+  text-decoration: none !important;
+}
+
+button.dt-button:hover, div.dt-button:hover, a.dt-button:hover {
+  font-weight: bold;
+}
+
+/* Formatando os textos que aparecem nas tables: */
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_filter {
+  font-family: 'Arvo', serif !important;
+  color: #094978 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px double #b1daff !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+  outline-color: #094978 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:hover {
+  box-shadow: 0 0 0.3em #094978;
+}
+
+/* Formatando as linhas: */
+.book .book-body .page-wrapper .page-inner section.normal table tr:nth-child(odd) {
+  background: #F2FAFF !important;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal table td:hover {
+  background: #1276C1 !important;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal thead th {
+  background: linear-gradient(to top, #b1daff, #094978) !important;
+  font-family: 'Abel', sans-serif;
+  color: #FFEEE0 !important;
+  text-align: center;
+  border: 1px double #b1daff !important;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal table tr {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Formatando a borda da table em si: */
+.book .book-body .page-wrapper .page-inner section.normal table {
+  border: 1px double #b1daff !important;
+  border-bottom: 2px double #b1daff !important;
+  text-align: center;
+}
+
+/* Formatando a barra de edição da tabela: */
+table.dataTable td.dt-center input {
+  outline-color: #094978 !important;
+}
+
+/* Dimiuindo zoom da página */
+.book {
+  zoom: 72%;
+}
+
+.book .book-summary .book-search input, .book .book-summary .book-search input:focus, .book .book-summary .book-search input:hover {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    outline: none;
+    line-height: 22px;
+    padding: 7px 4px;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+/* Adicionando borda aos gráficos: */
+.js-plotly-plot .plotly .main-svg {
+  border: 1px double #b1daff !important;
+}

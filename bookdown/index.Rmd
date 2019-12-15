@@ -1,0 +1,26 @@
+--- 
+title: 'Seminário - Modelos de Transição'
+author: '</em><h1 style="text-align:center;font-size:24px;">Modelos para Dados Correlacionados</h1><h3 style="text-align:center;">Autores: José Angelo Rosa Bastos, Gabriel Grandemagne dos Santos, Vítor Coutinho Borges, Raquel Rossi e Camila Leuck<br>Ministrante: Rodrigo Citton Padilha dos Reis Castro</h3><em>'
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+github-repo: angelorbastos
+description: "Seminário apresentado como parte do plano de ensino da cadeira de Modelos para Dados Correlacionados na Universidade Federal do Rio Grande do Sul."
+---
+
+```{r setup, message = FALSE, warning = FALSE, echo = FALSE}
+# Lendo as libraries necessárias:
+ler_libs <- function(packages){
+  instalar <- packages[!(packages %in% installed.packages()[, "Package"])]
+  
+  if(length(instalar) > 0){
+    install.packages(pkgs = instalar, dependencies = TRUE)
+  }
+  invisible(sapply(packages, require, character.only = TRUE))
+}
+
+ler_libs(packages = c("haven", "tidyr", "dplyr", "here", "DT", "plotly", "nlme", "lspline", "agricolae", "lavaSearch2"))
+```
+
+# Introdução {#intro}
+
