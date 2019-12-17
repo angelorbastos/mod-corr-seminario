@@ -14,15 +14,25 @@ output:
 
 class: center, middle, inverse, title-slide
 
-<h3 style = "font-family: Abel; vertical-align: top;">UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL</h4>
+<div>
+  <img src = "images/logo-ime.png" height = 75px width = 75px style = "position: absolute; left: 5px; top: 5px;">
+  <p style = "position: absolute; font-family: Ubuntu Condensed; font-size: 20px; top: 23px; left: 50%; transform: translate(-50%, -50%);">MAT02035 - MODELOS PARA DADOS CORRELACIONADOS</p>
+  <img src = "images/logo-ufrgs.png" height = 75px width = 97px style = "position: absolute; right: 5px; top: 5px;">
+</div>
 
-<h1 id="h1-capa">Seminário:<br/>Modelos de Transição</h1>
+<h1 id="h1-capa">Modelos de Transição</h1>
 
-<h1 id="h1-capa">Modelos para Dados Correlacionados (MAT02035)</h1>
+<div id = "texto-medio-esquerda"> 
+  <h4 style = "font-family: Abel">Angelo Rosa<br>Camila Leuck<br>Gabriel Grandemagne<br>Raquel Rossi<br>Vítor Coutinho</h4>
+</div>
 
-<h3 style = "font-family: Abel;">Angelo Rosa, Camila Leuck, Gabriel dos Santos, Raquel Rossi e Vítor Coutinho</h3>
+<div id = "texto-medio-direita"> 
+  <h4 style = "font-family: Abel"><br><br>Professor: Rodrigo Citton</h4>
+</div>
 
-<h4 style = "font-family: Abel;">Atualizado em `r Sys.setlocale('LC_ALL', 'Portuguese_Brazil.1252'); format(Sys.Date(), format = '%d de %B de %Y')`</h2>
+<div id="texto-baixo">
+  <p style = "font-family: Ubuntu Condensed; font-size: 20px;">Atualizado em `r Sys.setlocale('LC_ALL', 'Portuguese_Brazil.1252'); format(Sys.Date(), format = '%d de %B de %Y')`</p>
+</div>
 
 ---
 
@@ -141,4 +151,4 @@ $r_i^{D} = \pm (y_i - \hat{\mu_i})\sqrt{\frac{2 \hat{\omega_i}}{\hat{\phi}}[y_i(
 
 ---
 
-# Referências Bibliográficas
+# Referências e Link Úteis
