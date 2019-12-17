@@ -58,15 +58,15 @@ Os modelos de transição ou modelos de Markov, são aqueles nos quais qualquer 
 O método proposto para estimação do vetor de parâmetros $\beta$ foi o da máxima verossimilhança. Considerando uma amostra aleatória de n observações de uma distribuição exponencial
 
 
-$f(y_i,\theta_i,\phi)=exp [ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]$
+$f(y_i,\theta_i,\phi)=exp \{ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) \}$
 
 A função de verossimilhança é dada por
 
-$L( \theta_i , \phi ,y_i) = \prod_{i=1}^{n} f(y_i, \theta_i , \phi ) = exp[\sum_{i=1}^{n}[ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]]$
+$L( \theta_i , \phi ,y_i) = \prod_{i=1}^{n} f(y_i, \theta_i , \phi ) = exp\{\sum_{i=1}^{n}[ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]\}$
 
 Cujo logaritmo é
 
-$l( \theta_i , \phi ,y_i) =\sum_{i=1}^{n}[ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]$
+$l( \theta_i , \phi ,y_i) =\sum_{i=1}^{n}\{ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) \}$
 
 ---
 
