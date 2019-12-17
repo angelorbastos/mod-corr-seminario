@@ -27,7 +27,8 @@ class: center, middle, inverse, title-slide
 
 
 
-# Introdução
+# Motivação
+
 Nos estudos de dados longitudinais em que medidas são tomadas repetidamente sobre o mesmo indivíduo ao longo do tempo, há uma variação entre observações registradas entre indivíduos e dentro de um indivíduo.
 
 Quando os estudos são desenvolvidos considerando que a variável resposta não tem distribuição normal, geralmente a metodologia adequada para a análise é usar modelos lineares generalizados (MLGs).
@@ -38,16 +39,15 @@ Os modelos de transição ou modelos de Markov, são aqueles nos quais qualquer 
 # Estimação dos parâmetros do MLG
 O método proposto para estimação do vetor de parâmetros `\(\beta\)` foi o da máxima verossimilhança. Considerando uma amostra aleatória de n observações de uma distribuição exponencial
 
-
-`\(f(y_i,\theta_i,\phi)=exp \{ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) \}\)`
+`\(f(y_i,\theta_i,\phi)=\mathbb{exp} \Big{\{} \frac{1}{a_i(\phi)}\big{[}y_i \theta_i - b(\theta_i)\big{]}+c(y_i,\phi) \Big{\}}\)`
 
 A função de verossimilhança é dada por
 
-`\(L( \theta_i , \phi ,y_i) = \prod_{i=1}^{n} f(y_i, \theta_i , \phi ) = exp\{\sum_{i=1}^{n}[ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]\}\)`
+`\(L( \theta_i , \phi ,y_i) = \prod_{i=1}^{n} f(y_i, \theta_i , \phi ) = \mathbb{exp}\Big{\{}\sum_{i=1}^{n}\Big{[} \frac{1}{a_i(\phi)}\big{[}y_i \theta_i - b(\theta_i)\big{]}+c(y_i,\phi) \Big{]}\Big{\}}\)`
 
 Cujo logaritmo é
 
-`\(l( \theta_i , \phi ,y_i) =\sum_{i=1}^{n}\{ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) \}\)`
+`\(l( \theta_i , \phi ,y_i) =\sum_{i=1}^{n}\Big{\{} \frac{1}{a_i(\phi)}\big{[}y_i \theta_i - b(\theta_i)\big{]}+c(y_i,\phi) \Big{\}}\)`
 
 ---
 
