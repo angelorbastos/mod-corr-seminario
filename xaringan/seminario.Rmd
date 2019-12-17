@@ -47,6 +47,73 @@ ler_libs(packages = c('leaflet', 'DT'))
 ```
 
 # Introdução
+Nos estudos de dados longitudinais em que medidas são tomadas repetidamente sobre o mesmo indivíduo ao longo do tempo, há uma variação entre observações registradas entre indivíduos e dentro de um indivíduo.
+
+Quando os estudos são desenvolvidos considerando que a variável resposta não tem distribuição normal, geralmente a metodologia adequada para a análise é usar modelos lineares generalizados (MLGs).
+
+Os modelos de transição ou modelos de Markov, são aqueles nos quais qualquer resposta numa sequência de medidas repetidas é modelada condicionalmente sob um ou mais conjuntos de medições passadas. Basicamente caracterizam-se por apresentar uma relação de dependência da distribuição condicional da resposta atual sobre as respostas anteriores e as variáveis explicativas.
+---
+
+# Estimação dos parâmetros do MLG
+O método proposto para estimação do vetor de parâmetros $\beta$ foi o da máxima verossimilhança. Considerando uma amostra aleatória de n observações de uma distribuição exponencial
+
+
+$f(y_i,\theta_i,\phi)=exp [ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]$
+
+A função de verossimilhança é dada por
+
+$L( \theta_i , \phi ,y_i) = \prod_{i=1}^{n} f(y_i, \theta_i , \phi ) = exp[\sum_{i=1}^{n}[ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]]$
+
+Cujo logaritmo é
+
+$l( \theta_i , \phi ,y_i) =\sum_{i=1}^{n}[ \frac{1}{a_i(\phi)}[y_i \theta_i - b(\theta_i)]+c(y_i,\phi) ]$
+
+---
+
+# Estimação dos parâmetros do MLG
+
+Derivando a última função vista no slide passado em relação a $\beta_j$, obtém-se a função escore
+
+$U_j= \frac{\partial l}{\partial \beta_j} = \frac{\partial l}{\partial \theta_i} \frac{\partial \theta_i}{\partial \mu_i} \frac{\partial \mu_i}{\partial \eta_i} \frac{\partial \eta_i}{\partial \beta_j} = \sum_{i=1}^{n} \frac{1}{a_i(\phi)} (y_i - \mu_i) (\frac{\partial \theta_i}{\partial \eta_i}) x_{ij}$
+
+Soluções aproximadas podem ser encontradas utilizando método Newton-Raphson ou método escore de Fisher, pelo método de Fisher temos:
+
+$\beta^{(m+1)} = (X'W^{(m)}X)^{-1} X'W^{(m)}z^{(m)}$
+
+Onde X é a matriz de especificação do modelo e W é a matriz diagonal de pesos.
+
+---
+
+# Análise de resíduos e diagnósticos
+As técnicas usadas são as mesmas dos modelos lineares clássicos, com resposta normal, tanto para as técnicas baseadas em testes de hipóteses como para as baseadas em recursos gráficos. Os resíduos mais usuais para análise e diagnósticos dos MLGs são:
+
+1) Resíduos de Pearson generalizados
+
+$r_i^{p} = \frac{y_i -\hat{\mu_i}}{\sqrt{\frac{\hat{\phi}}{\omega_i}V(\hat{\mu_i})}}$
+
+Em que $\hat{\phi}$ é uma estimativa consistente para o parâmetro de dispersão $\phi$ e $\omega_i$ são presos a priori.
+
+---
+
+# Análise de resíduos e diagnósticos
+
+2) Resíduos de Pearson generalizados padronizados internamente
+
+$r_i^{p^i} = \frac{y_i -\hat{\mu_i}}{\sqrt{\frac{\hat{\phi}}{\omega_i}V(\hat{\mu_i})}(1-h_i)}$
+
+Através de estudos de simulação de Monte Carlo a distribuição de resíduos não possuí distribuição normal, mesmo para grandes amostras.
+
+---
+
+# Análise de resíduos e diagnósticos
+
+3) Componentes do desvio padronizados internamente
+
+$r_i^{D^i} = \frac{r_i^D}{\sqrt{1-h_i}}$
+
+É a versão padronizada do desvio abaixo. É o mais utilizado, tendo em vista que dentre todos a distribuição do desvio padronizado é a que mais se aproxima da normal.
+
+$r_i^{D} = \pm (y_i - \hat{\mu_i})\sqrt{\frac{2 \hat{\omega_i}}{\hat{\phi}}[y_i(\tilde{\theta_i} - \hat{\theta_i}) - b(\tilde{\theta_i})+b(\hat{\theta_i})]}$
 
 ---
 
