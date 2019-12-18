@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>seminario.utf8</title>
+    <title></title>
     <meta charset="utf-8" />
     <link href="libs/remark-css/chocolate-fonts.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Abel|Biryani|Ubuntu+Condensed|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
@@ -255,15 +255,119 @@ onde `\(\pi_{ab} = \mathbb{P}(Y_{ij}=b|Y_{ij-1}=a),\space a,b=0,1\)`
 
 - Uma vantagem desse modelo é testar quando um modelo simples se ajusta corretamente aos dados, como por exemplo podemos testar quando `\(\alpha=(\alpha_0,0)\)`, então nosso modelo `\(y_{ij-1}x'_{ij}\alpha=\alpha_0Y_{ij-1}\)` implicando que a covariância tem o mesmo efeito na resposta quando `\(y_{ij-1}=0\)` ou `\(y_{ij-1}=1\)`.
 
-  + Testando se o `\(\alpha\)` está perto de 0, indica que a covariavel associada pode ser descartada do modelo.
-
 ---
 
 # Dados Categóricos
 
 - Analogamente, observando duas prévias medições no tempos temos que `$$\mathbb{logit}\,\mathbb{P}(Y_{ij}=1|Y_{ij-2}=y_{ij-2},\,Y_{ij-1}=y_{ij-1}) \\ = x'_{ij}\beta + y_{ij-1}x'_{ij}\alpha_1+y_{ij-2}x'_{ij}\alpha_2+y_{ij-1}y_{ij-2}x'_{ij}\alpha_3$$` 
 
-- Colocando valores diferentes para `\(y_{ij-2}\,\text{ e }\,y_{ij-1}\)` obtemos: &lt;p style = "text-align: center;"&gt; `\(\beta_{00}=\beta\)`; `\(\beta_{01}=\beta+\alpha_1\)`; `\(\beta_{10}=\beta+\alpha_2\)` e  `\(\beta_{11}=\beta+\alpha_1+\alpha_2+\alpha_3\)` &lt;/p&gt;
+- Colocando valores diferentes para `\(y_{ij-2}\,\text{ e }\,y_{ij-1}\)` obtemos: &lt;p style = "text-align: center;"&gt; `\(\beta_{00}=\beta\)`; `\(\,\,\beta_{01}=\beta+\alpha_1\)`; `\(\,\,\beta_{10}=\beta+\alpha_2\,\,\)` e  `\(\,\,\beta_{11}=\beta+\alpha_1+\alpha_2+\alpha_3\)` &lt;/p&gt;
+
+- Um caso importante ocorre quando não há interações entre as respostas prévias `\(y_{ij-1} \,\text{ e }\,\, y_{ij-2}\)`, assim como as variáveis explicativas, ou seja, quando todos os elementos de `\(\alpha_i\)` é zero exceto o intercepto. Nesse caso, as respostas prévias afetam a probabilidade de um desfexo positivo porém os efeitos das variáveis explicativas são os mesmos independente de suas outras medições.
+
+---
+
+# Dados Categóricos
+
+- Nessa situação, devemos escolher entre modelos Markov de ordens diferentes, por exemplo, podemos começar com um modelo de terceira ordem da forma `$$\mathbb{logit}\,\mathbb{P}(Y_{ij}=1|Y_{ij-3}=y_{ij-3},Y_{ij-2}=y_{ij-2},\,Y_{ij-1}=y_{ij-1}) \\ = x'_{ij}\beta + \alpha_1y_{ij-1}+\alpha_2y_{ij-2}+\alpha_3y_{ij-3}+\alpha_4y_{ij-1}y_{ij-2} \\ +\alpha_5y_{ij-1}y_{ij-3}+\alpha_6y_{ij-2}y_{ij-3}+\alpha_7y_{ij-1}y_{ij-2}y_{ij-3}$$` 
+
+- Um modelo de segunda ordem pode ser usado se os dados são consistentes com `\(\alpha_3=\alpha_5=\alpha_6=\alpha_7=0\)`, um modelo de primeira ordem está implicito se `\(\alpha_j=0 \text{ para } j=2,\dots,7.\)`. Com qualquer outro coeficiente de regressão, a interpretação e o valor de `\(\beta\)` (no modelo de terceira ordem) depende nas outras variáveis explicativas no modelo, em particular nas quais as respostas prévias está inclusa.
+
+---
+
+# Dados Categóricos
+
+- Quando os modelos de Markov são bem especificados, os eventos de transição não são correlacionados, então podemos utilizar regressão logística para estimar os coeficientes de regressão e seus erros-padrões. Entretanto pode haver circunstâncias quando escolhemos modelar `\(\mathbb{P}(Y_{ij}\,|\,Y_{ij-1},\dots,Y_{ij-q})\)` mesmo não sendo igual à `\(\mathbb{P}(Y_{ij}\,|\,H_{ij})\)`. Por exemplo, supondo heterogeneidade entre os indivíduos na matrix de transição, um modelo rasoavel é &lt;p style = "text-align: center;"&gt; `$$\mathbb{P}(Y_{ij}=1\,|\,Y_{ij-1},\, U_i)=(\beta_0+U_i)+x'_{ij}\beta+\alpha y_{ij-1},$$`&lt;/p&gt; onde `\(U_i\)` ~ `\(N(0,\sigma^2)\)`.
+
+---
+
+# Dados Categóricos - Exemplo
+
+-  Um estudo feito com crianças da indonésia a fim de mensurar o quanto a deficiência de vitamina A (indicada no banco pela presença da doença xerophtalmia) está associada com uma maior prevalência de infecções respiratórias.
+
+- Na tabela abaixo mostramos a contagem das transições entre um estado e outro ao longo das 1200 observações, a fim de ter uma estimação das probabilidades de transição ignorando, por hora, a dependência das covariáveis explanatórias.
+
+-Tabela 1:
+&lt;img src = "images/table_Ex1.png" height = 161px width = 249px&gt;
+
+---
+
+# Dados Categóricos - Exemplo
+
+- As taxas acima estimam `\(Pr(Y_{ij} |Y_{ij-1})\)`. Podemos perceber:
+
+  + 1) Ocorreram 855 transições nas 1200 observações,
+  + 2) Para crianças que não possuiam doenças respiratórias na primeira visita, **7,7%** passuiam na segunda visita, enquanto **13,5%** dos que possuíam doenças respiratórias  na primeira visita também possuiam na segunda visita.
+  
+- Vejamos agora a distribuição da variável resposta, dado a presença de xerophtalmia `\((X_{ij} = 1)\)`.
+- Tabela 2:
+&lt;img src = "images/resp_x.png" height = 171px width = 314px&gt;
+
+---
+
+# Dados Categóricos - Exemplo
+
+- Podemos perceber que a proporção de crianças com deficiência de vitamina A e com infeções respiratórias é maior do que a proporção de crianças com o mesmo status e sem deficiência de vitamina A.
+
+- A próxima tabela contém o cruzamento das informações dadas nas tabelas anteriores, a fim de ter uma maior noção do comportamento da variável resposta sob influência do status anterior `\((Y_{ij-1} = 0,1)\)` e da presença de xerophtalmia (indicador de deficiência de vitamina A).
+-Tabela 3:
+&lt;img src = "images/resp_x_tempo.png" height = 197px width = 381px&gt;
+
+---
+
+# Dados Categóricos -  Exemplo
+
+- Com esses dados, percebemos que para o primeiro cenário, `\(Y_{ij} = 0\)` na visita anterior, a frquencia de infecção respiratória é 1.49 vezes maior entre indivíduos que apresetam xerophtalmia, enquanto no segundo cenário, `\(Y_{ij} = 1\)` na visita anterior, a proporção de indivíduos com doenças respiratórias é 1.54, assim vemos que para os dois cenários os resultados quanto ao efeito da xerophtalmia são semelhantes, embora `\(Y_{ij-1}\)` seja um bom preditor de `\(Y_{ij}\)`.
+
+  + Dado as análises exploratórias, sugerimos um modelo logit `\(Pr(Y_{ij}=1|Y_{ij-1}=y_{ij-1}) = x_{ij} \beta + \alpha y_{ij-1}\)`
+
+- Ajustamos modelos utilizando as variáveis mostradas anteriormente e alguns resultados são abordados na tabela a seguir,
+a tabela também contém informações de modelos utilizando outras covariáveis.
+
+---
+
+# Dados Categóricos -  Exemplo
+- Tabela 4:
+&lt;img src = "images/tabela_coefs.png" height = 498px width = 522px&gt;
+
+---
+
+# Dados Categóricos -  Exemplo
+
+- Modelo 1) A tabela contém o coeficiente da regressão, o erro padrão definido por procedimentos comuns de regressão logística e o erro padrão robusto. O primeiro modelo leva em conta apenas a presença de Xerophtalmia e suas estimações devem reproduzir a Tabela 2. Percebam que a frequencia de crianças sem xerophtalmia com infecções respiratórias é **8,0%** = `\(\text{exp}\frac{(-2.44)}{[1+exp(-2.44)]}\)`. Calculando o log odds ratio da Tabela 2 obetmos: `\(log\Bigg[\frac{(0.119/0.881)}{(0.080/0.920)}\,\Bigg]=0.44,\)` que é o coeficiente da variável xerophtalmia na tabela 4
+
+---
+
+# Dados Categóricos -  Exemplo
+
+- Modelo 2) Contém uma análise que vê a diferença na associação de xerophtalmia e doenças respiratórias quanto a presença de doenças respiratórias na visita anterior do indivíduo e deve reproduzir as taxas de transição da Tabela 3.
+
+  + Olhando para as crianças sem infecção respiratória o log odds ratio para xerophtalmia é igual ao coeficiente para xerophtlamia (atual visita) no modelo 2 `\((log[(0.108/0.892)/(0.075/0.925] = 0.40)\)`. Assim, o log odds ratio para crianças com infecção na visita aterior será 0.40 + 0.11= 0.51 (efeito de `\(xerophtalmia + infecçao*xerophtalmia\)` na visita anterior)
+
+---
+
+# Dados Categóricos -  Exemplo
+
+- Quando comparamos a Tabela 2 com Tabela 3 obtemos indícios que o efeito de xerophtalmia é similar entre os indivíduos que pussuíam ou não infecção na visita anterior, os resultados do modelo 2 nos confirmam isso, afinal, temos que o IC95 para o coeficiente da interação `\(infecção*xerophtalmia\)` é (-2.1 ;2.3), inclusive, essa interação foi retirada no modelo 3.
+
+  + Os modelos anteriores ilustram bem regressões logísticas ajustadas a cadeias de markov simples, tal formulação nos permite adicionar com facilidade covariáveis ao modelo, assim, vemos os efeitos ao adicionar as variáveis idade e um indicador dicotômico de temporada, (1 = 2º quadrimestre, 0 = Outro).
+
+---
+
+# Dados Categóricos -  Exemplo
+
+- Modelo 4: Foi ajustado um modelo com todas as variáveis descritas e suas interações  com `\(Y_{ij-1}\)` (seria o mesmo que calcular regressões separadas para os casos em que `\(Y_{ij-1} = 0, 1\)`). Como nenhuma das interações teve importância, elas foram retiradas no Modelo 5.
+
+- Em modelos de transição é importante checar o quanto as inferências da regressão sobre `\(\beta\)` mudam em conjunto com a dependência da variável resposta com o tempo. Assim, para ilustrar, vamos apresentar os resultados quando adicionamos `\(Y_{ij-2}\)` ao Modelo 5:
+
+  + 1) A influência de `\(Y_{ij-1}\)` e da Temporada diminui.
+  + 2) O coeficiente de xerophtalmia aumenta para 1.73, aproximadamente o dobro do coeficinete no modelo 5.
+
+---
+
+# Dados Categóricos -  Exemplo
+
+- Assim, mostramos uma importante propriedade dos modelos de transição: As variáveis explicativas e as respostas anteriores são tratadas simetricamente como preditores da variável resposta, desse modo, as interpretações quanto as variáveis explicativas vão mudar quando a influência das respostas antriores sofrerem mudanças. É interessante checar a sensitividade do efeito das covariáveis quanto à diferentes modelos com dependência de tempo.
 
 ---
 
@@ -278,6 +382,7 @@ class: img-page
 # Dados de Contagem
 
 ---
+
 
 class: img-page
 
