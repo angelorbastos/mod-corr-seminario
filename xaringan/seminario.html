@@ -424,8 +424,61 @@ class: img-page
 
 # Dados de Contagem
 
+- Vamos considerar extensões do modelo log-linear no qual o distribuição condicional de `\(y_{ij}\)` dado o passado `\(H_{ij}\)` é Poisson com expectativas condicionais  que depende tanto dos resultados passados `\(y_{i1},\dots,y_{ij-1}\)` quanto das variáveis explicativas `\(x_{ij}\)`. Começamos analisando três modelos possíveis para a média condicional `\(\mu_{ij}^C\)` . Em cada caso, restringimos nossa atenção a uma cadeia Markov de primeira ordem.
+ 
 ---
 
+# Dados de Contagem
+
+- 1) `\(\mu_{ij}^C=\text{exp}(x'_{ij}\beta)\{1+\text{exp}(-\alpha_0-\alpha_1 y_{ij-1})\},\,\alpha_0,\alpha_1&gt;0\)`
+
+  + Nesse modelo, `\(\beta\)`  representa a influência das variáveis explicativas quando a resposta anterior assume o valor `\(y_{ij-1}=0.\)` Quando `\(y_{ij-1}&gt;0\)` a expectativa condicional diminui de seu máximo valor, `\(\text{exp}(x'_{ij}\beta)\{1+\text{exp}(-\alpha_0)\},\)`  em uma quantidade que depende de `\(\alpha_1,\)` portanto este modelo permite apenas uma associação negativa entre as respostas anteriores e atuais. Para um dado `\(\alpha_0\)`, o grau de correlação negativa  aumenta à medida que `\(\alpha_1\)` aumenta. Observe que a expectativa condicional deve variar entre `\(\text{exp}(x'_{ij}β)\)` e duas vezes esse valor, como conseqüência das restrições em `\(\alpha_0\)` e `\(\alpha_1\)`.
+
+---
+
+# Dados de Contagem
+
+- 2) `\(\mu_{ij}^C=\text{exp}(x'_{ij}\beta+\alpha y_{ij-1})\)`
+
+  + Este modelo parece sensível por analogia com o modelo logístico. Mas tem aplicação limitada para dados de contagem porque quando `\(\alpha&gt;0,\)` a expectativa condicional cresce como uma função exponencial do tempo. De fato, quando `\(\text{exp}(x'_{ij}\beta)=\mu,\)` correspondendo a nenhuma dependência de covariáveis, essa suposição leva a um processo estacionário somente quando `\(\alpha&gt;0\)`. Portanto, o modelo pode descrever associação negativa
+mas não associação positiva sem crescer exponencialmente ao longo do tempo.
+
+
+---
+
+# Dados de Contagem
+
+- 3) `\(\mu_{ij}^C=\text{exp}[x'_{ij}\beta+\alpha\{\text{log}(y_{ij-1}^*)-x'_{ij-1}\beta\}], \text{ onde } y_{ij-1}^*=\text{max}(y_{ij-1},\,d)\)`
+
+  + Quando `\(\alpha=0,\)` reduz para um modelo log-linear comum. Quando `\(\alpha&lt;0,\)` uma resposta anterior maior que sua expectativa diminui a expectativa para a resposta atual e há correlação negativa entre `\(y_{ij-1} \text{ e } y_{ij}.\)` Quando `\(\alpha&gt;0,\)` existe correlação positiva.
+
+---
+
+# Dados de Contagem
+
+- Agora iremos focar no terceiro modelo de transição de Poisson acima. Pode surgir através do  processo de ramificação dependente do tamanho.
+
+&lt;p style = "text-align: center;"&gt;$$y_j=\sum_{k=1}^{y_{j-1}}Z_k(y_{j-1})$$&lt;/p&gt;
+
+A figura no próximo slide mostra cinco realizações desse modelo de transição para diferentes
+valores de `\(\alpha\)`:
+
+---
+
+# Dados de Contagem
+
+---
+
+# Dados de Contagem
+
+- Quando `\(\alpha&lt;0,\)` os caminhos da amostra oscilam para frente e para trás sobre o nível médio de longo prazo, pois um grande resultado ao mesmo tempo diminui
+a expectativa condicional da próxima resposta.
+
+- Quando `\(\alpha&gt;0,\)` o processo serpenteia, permanecendo abaixo da média de longo prazo por longos períodos.
+
+  + Observe que os caminhos da amostra têm picos mais acentuados e vales mais amplos. Este padrão contrasta com os      caminhos de amostra autoregressivos gaussianos para os quais os picos e vales têm a mesma forma.
+
+---
 
 class: img-page
 
