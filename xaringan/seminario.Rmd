@@ -393,6 +393,49 @@ a tabela também contém informações de modelos utilizando outras covariáveis
 
 ---
 
+# Dados Categóricos Ordenados
+
+- Para formular um modelo de transição para dados categóricos ordenados, dizemos que $Y_{ij}$ indica a variável resposta que contém $C$ valores de categorias ordenadas, chamadas $0,1,\dots,C-1.$ Um exemplo comum de dados categóricos ordenados seria um escore de saúde, como: ruim, médio, bom e exelente.
+- A matriz de primeira ordem para $Y_{ij}$ é definida por $\pi_{ab}=\mathbb{P}(Y_{ij}=b\,|\,Y_{ij-1}=a) \text{  para } a,b=0,1,\dots,C-1.$ Com dados binários $(C=2)$, um modelo saturado da matriz de transição pode ser obtido ajustando uma regressão separadamente para cada possível valor $C$ de $Y_{ij}-1$, ou seja, modelamos $\mathbb{P}(Y_{ij}=b\,|\,Y_{ij-1}=a)$ separadamente para cada $a=0,1,\dots,C-1.$
+
+---
+
+# Dados Categóricos Ordenados
+
+- Queremos encontrar um modelo de regressão cujo coeficientes tem a mesma interpretação quando nós combinamos ou separamos as categorias, então trabalhamos com a probabilidade acumulada $\mathbb{P}(Y\le a).$ Com as probabilidades acumuladas, podemos derivar a célula de probabilidades pois $\mathbb{P}(Y\le a)=\mathbb{P}(Y\le a-1)+\mathbb{P}(Y= a),\, a=1,\dots,C-1.$ O modelo de razão para observações independentes se dá por <p style = "text-align: center;"> $$\text{logit}\,\mathbb{P}(Y\le a)=\text{log}\frac{\mathbb{P}(Y\le a)}{\mathbb{P}(Y> a)}=\theta_a+x'\beta,$$ </p>
+onde $a=0,1,\dots,C-2.$ Daqui em diante iremos escrever o intercepto do modelo como $\theta_a$ e não iremos incluir um intercepto em termos de $x$.
+
+---
+
+# Dados Categóricos Ordenados
+
+- O parâmetro de regressão $\beta$ possuí uma interpretação de seu log razão de chances, pois <p style = "text-align: center;">$$\frac{\mathbb{P}(Y\le a\,|\,x_1)/\mathbb{P}(Y>a\,|\,x_1)}{\mathbb{P}(Y\le a\,|\,x_2)/\mathbb{P}(Y>a\,|\,x_2)}=\text{exp }\{(x_1-x_2)'\beta\}$$</p>
+
+- É conveniente introduzir o vetor de variáveis $Y^*=(Y_0^*,Y_1^*,\dots,Y_{C-2}^*)$ definido por $Y_a^*=1,$ se $Y\le a$ e 0 caso contrário. O modelo proporcional de chance é a regressão logística para $Y_a^*$, pois <p style = "text-align: center;">$$\text{log}\,\frac{\mathbb{P}(Y\le a)}{\mathbb{P}(Y>a)}=\text{logit}\,\mathbb{P}(Y_a^*=1)=\theta_a+x'\beta,\,\, a=0,1,\dots,C-2.$$</p>
+  + Nossa primeira aplicação é o modelo saturado de primeira ordem sem as covariáveis. A matriz de transição é dada por $\mathbb{P}(Y_{ij}=b\,|\,Y_{ij-1}=a),\, a=0,1,\dots,C-1$
+
+---
+
+# Dados Categóricos Ordenados
+
+- Modelando as probabilidades acumuladas, $\mathbb{P}(Y_{ij}\le b \,|\, Y_{ij-1}=a)=\pi_{a0}+\pi_{a1}+\dots+\pi_{ab},$ assumindo que $\text{log}\frac{\mathbb{P}(Y_{ij}\le b \,|\, Y_{ij-1}=a)}{\mathbb{P}(Y_{ij}> b \,|\, Y_{ij-1}=a)}=\theta_{ab}$
+onde $a=0,1,\dots,C-1$ e $b=0,1,\dots,C-2.$ Agora supondo que as covariáveis $x_{ij}$ acarretam diferentes efeitos em $Y_{ij}$ para cada observação prévia $Y_{ij-1}$ o modelo pode ser descrito como $\text{log}\frac{\mathbb{P}(Y_{ij}\le b \,|\, Y_{ij-1}=a)}{\mathbb{P}(Y_{ij}> b \,|\, Y_{ij-1}=a)}=\theta_{ab}+x'_{ij}\beta_a$
+
+---
+
+# Dados Categóricos Ordenados
+
+Também podemos escrever o modelo acima como uma única (talvez complcada) equação de regressão 
+
+<img src = "images/feqt.png" height = 101px width = 316px>
+
+Com a formulação acima, podemos ver se o efeito das covariáveis muda em relação as categorias de $Y_{ij-1}$
+  testando se $\gamma_a = 0$
+
+O modelo de regressão ordinal de transição pode  ser estimado usando máxima verossimilhança condicional, isso é, condicionando cada indiídua à sua primeira resposta.
+
+---
+
 class: img-page
 
 <h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Dados de Contagem</h1>
