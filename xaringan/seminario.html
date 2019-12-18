@@ -37,28 +37,51 @@ class: center, middle, inverse, title-slide
 
 
 
-# Introdução
-
-- Os modelos marginais não são suficientes para descrever toda informação de estudos longitudinais, apesar de permitirem a especificação de uma estrutura par a matriz de covariância
-  + Isto porque não captam todos os efeitos intra-indivíduos
-
-- Uma solução é considerar no modelo a dependência entre a observação de cada indivíduo amostrado em determinado tempo com suas observações passadas
-
-- Neste seminário, consideraremos extensões de MLGs para descrever a distribuição condicional da resposta `\(y_{ij}\)` do indivíduo `\(i\)` no tempo `\(j\)` como uma função explícita de suas respostas nos tempos anteriores, dadas por `\(y_{ij-1},\,y_{ij-2},\,...,\,y_{i1}\)`, e das covariáveis `\(\textbf{x}_{ij}\)`
-
----
-
 # Definições Importantes
 
 - Um **processo estocástico** é, de forma simplificada, um modelo matemático utilizado para analisar trajetórias (funções) de fenômenos aleatórios
 
-- Uma **cadeia de Markov** 
+- Dado um espaço de estados `\(E\)`, uma distribuição `\(\{p_i\}_{i\in E}\)` é uma matriz **markoviana** `\(P\)` e uma sucessão de variáveis aleatórias `\(\{X_n\}_{n=0,\,1,\,...}\)` é uma **cadeia de Markov** se e somente se:
+
+&lt;p style = "text-align: center;"&gt;$$p[X_0=i_0,\,...,\,X_n=i_n]=p_{i_0}p_{i_0}i_1\,...\,p_{i_{n-1}}i_n\,\,\,\forall{n},\,\,\forall{i_1,\,...,\,i_n\in{E}}$$&lt;/p&gt;
+
+---
+
+# Motivação
+
+- Modelos marginais não captam todos efeitos **intra**-indivíduos em estudos longitudinais, apesar de permitirem a especificação de uma estrutura para a matriz de covariância
+  + Isto porque os métodos modelam a regressão de `\(Y\)` sobre `\(x\)` e a **associação** entre repetições
+  + Não levam em conta a **distribuição** de `\(Y\)` nas repetições anteriores 
+  
+- Modelos de efeitos aleatórios não resolvem esta questão, pois lidam com a heterogeneidade **entre** indivíduos
+
+- Para resolver este problema, foram desenvolvidas extensões de MLGs para descrever a distribuição condicional da resposta `\(y_{ij}\)` do indivíduo `\(i\)` no tempo `\(j\)` como uma função explícita de suas respostas nos tempos anteriores, dadas por `\(y_{ij-1},\,y_{ij-2},\,...,\,y_{i1}\)`, e das covariáveis `\(x_{ij}\)`
 
 ---
 
 # Modelos de Markov
 
-- Denotaremos o histórico do sujeito `\(i\)` no tempo `\(j\)` por `\(\mathcal{H}_{ij}=\{y_{ik},\, k = 1,\,...,\,j-1\}\)`
+- Denotaremos o **histórico** do sujeito `\(i\)` no tempo `\(j\)` por:
+
+&lt;p style = "text-align: center;"&gt;$$\mathcal{H}_{ij}=\{y_{ik},\, k = 1,\,...,\,j-1\}$$&lt;/p&gt;
+
+- A forma geral do MLG em questão, para `\(\psi(\theta_{ij})\)` e `\(c(y_{ij},\,\phi)\)` conhecidas, é:
+
+&lt;p style = "text-align: center;"&gt;$$f(y_{ij}|\mathcal{H}_{ij})=\mathbb{exp}\Big\{\frac{y_{ij}\theta_{ij}-\psi(\theta_{ij})}{\phi}+c(y_{ij},\,\phi)\Big\}$$&lt;/p&gt;
+
+- A média e variância condicionais são dadas por:
+
+&lt;p style = "text-align: center;"&gt;$$\mu_{ij}^{C}=\mathbb{E}(Y_{ij}|\mathcal{H}_{ij})=\psi'(\theta_{ij})\,\,\text{ e }\,\,v_{ij}^{C}=\mathbb{Var}(Y_{ij}|\mathcal{H}_{ij})=\psi''(\theta_{ij})\phi$$&lt;/p&gt;
+
+---
+
+# Modelos de Markov
+
+
+
+---
+
+# Modelos de Markov - Observações
 
 - Os modelos de transição mais úteis são cadeias de Markov em que a distribuição condicional de `\(y_{ij}\)` dado `\(\mathcal{H}_{ij}\)` depende somente das `\(q\)` observações anteriores
   + Neste caso, `\(q\)` é chamado de **ordem** do modelo
@@ -124,14 +147,6 @@ Através de estudos de simulação de Monte Carlo a distribuição de resíduos 
 É a versão padronizada do desvio abaixo. É o mais utilizado, tendo em vista que dentre todos a distribuição do desvio padronizado é a que mais se aproxima da normal.
 
 `\(r_i^{D} = \pm (y_i - \hat{\mu_i})\sqrt{\frac{2 \hat{\omega_i}}{\hat{\phi}}[y_i(\tilde{\theta_i} - \hat{\theta_i}) - b(\tilde{\theta_i})+b(\hat{\theta_i})]}\)`
-
----
-
-# Contextualização
-
----
-
-# Modelos de Transição
 
 ---
 
