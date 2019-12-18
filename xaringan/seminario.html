@@ -461,11 +461,13 @@ mas não associação positiva sem crescer exponencialmente ao longo do tempo.
 &lt;p style = "text-align: center;"&gt;$$y_j=\sum_{k=1}^{y_{j-1}}Z_k(y_{j-1})$$&lt;/p&gt;
 
 A figura no próximo slide mostra cinco realizações desse modelo de transição para diferentes
-valores de `\(\alpha\)`:
+valores de `\(\alpha\)`
 
 ---
 
 # Dados de Contagem
+
+&lt;img src = "images/Capturar1.png" height = 500px width = 400px&gt;
 
 ---
 
@@ -477,6 +479,14 @@ a expectativa condicional da próxima resposta.
 - Quando `\(\alpha&gt;0,\)` o processo serpenteia, permanecendo abaixo da média de longo prazo por longos períodos.
 
   + Observe que os caminhos da amostra têm picos mais acentuados e vales mais amplos. Este padrão contrasta com os      caminhos de amostra autoregressivos gaussianos para os quais os picos e vales têm a mesma forma.
+
+---
+
+# Dados de Contagem
+
+- No modelo de Poisson, a variância condicional é igual à média condicional. Quando por acaso temos uma observação grande, a média condicional e a variância do próximo valor são ambos grandes; isto é, o processo se torna instável e rapidamente cai em direção a média de longo prazo. 
+
+  + Após um pequeno resultado, a média e a variância condicionais são pequenas; portanto, o processo tende a ser mais estável. Portanto, existem vales mais amplos e picos mais nítidos.
 
 ---
 
