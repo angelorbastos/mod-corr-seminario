@@ -14,15 +14,25 @@ output:
 
 class: center, middle, inverse, title-slide
 
-<h3 style = "font-family: Abel; vertical-align: top;">UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL</h4>
+<div>
+  <img src = "images/logo-ime.png" height = 75px width = 75px style = "position: absolute; left: 5px; top: 5px;">
+  <p style = "position: absolute; font-family: Ubuntu Condensed; font-size: 20px; top: 23px; left: 50%; transform: translate(-50%, -50%);">MAT02035 - MODELOS PARA DADOS CORRELACIONADOS</p>
+  <img src = "images/logo-ufrgs.png" height = 75px width = 97px style = "position: absolute; right: 5px; top: 5px;">
+</div>
 
-<h1 id="h1-capa">Seminário:<br/>Modelos de Transição</h1>
+<h1 id="h1-capa">Modelos de Transição<br>(Modelos de Markov)</h1>
 
-<h1 id="h1-capa">Modelos para Dados Correlacionados (MAT02035)</h1>
+<div id = "texto-medio-esquerda"> 
+  <h4 style = "font-family: Abel">Angelo Rosa<br>Camila Leuck<br>Gabriel Grandemagne<br>Raquel Rossi<br>Vítor Coutinho</h4>
+</div>
 
-<h3 style = "font-family: Abel;">Angelo Rosa, Camila Leuck, Gabriel dos Santos, Raquel Rossi e Vítor Coutinho</h3>
+<div id = "texto-medio-direita"> 
+  <h4 style = "font-family: Abel"><br><br>Professor: Rodrigo Citton</h4>
+</div>
 
-<h4 style = "font-family: Abel;">Atualizado em `r Sys.setlocale('LC_ALL', 'Portuguese_Brazil.1252'); format(Sys.Date(), format = '%d de %B de %Y')`</h2>
+<div id="texto-baixo">
+  <p style = "font-family: Ubuntu Condensed; font-size: 20px;">Atualizado em `r Sys.setlocale('LC_ALL', 'Portuguese_Brazil.1252'); format(Sys.Date(), format = '%d de %B de %Y')`</p>
+</div>
 
 ---
 
@@ -46,13 +56,32 @@ ler_libs(packages = c('leaflet', 'DT'))
 
 ```
 
-# Motivação
+# Introdução
 
-Nos estudos de dados longitudinais em que medidas são tomadas repetidamente sobre o mesmo indivíduo ao longo do tempo, há uma variação entre observações registradas entre indivíduos e dentro de um indivíduo.
+- Os modelos marginais não são suficientes para descrever toda informação de estudos longitudinais, apesar de permitirem a especificação de uma estrutura par a matriz de covariância
+  + Isto porque não captam todos os efeitos intra-indivíduos
 
-Quando os estudos são desenvolvidos considerando que a variável resposta não tem distribuição normal, geralmente a metodologia adequada para a análise é usar modelos lineares generalizados (MLGs).
+- Uma solução é considerar no modelo a dependência entre a observação de cada indivíduo amostrado em determinado tempo com suas observações passadas
 
-Os modelos de transição ou modelos de Markov, são aqueles nos quais qualquer resposta numa sequência de medidas repetidas é modelada condicionalmente sob um ou mais conjuntos de medições passadas. Basicamente caracterizam-se por apresentar uma relação de dependência da distribuição condicional da resposta atual sobre as respostas anteriores e as variáveis explicativas.
+- Neste seminário, consideraremos extensões de MLGs para descrever a distribuição condicional da resposta $y_{ij}$ do indivíduo $i$ no tempo $j$ como uma função explícita de suas respostas nos tempos anteriores, dadas por $y_{ij-1},\,y_{ij-2},\,...,\,y_{i1}$, e das covariáveis $\textbf{x}_{ij}$
+
+---
+
+# Definições Importantes
+
+- Um **processo estocástico** é, de forma simplificada, um modelo matemático utilizado para analisar trajetórias (funções) de fenômenos aleatórios
+
+- Uma **cadeia de Markov** 
+
+---
+
+# Modelos de Markov
+
+- Denotaremos o histórico do sujeito $i$ no tempo $j$ por $\mathcal{H}_{ij}=\{y_{ik},\, k = 1,\,...,\,j-1\}$
+
+- Os modelos de transição mais úteis são cadeias de Markov em que a distribuição condicional de $y_{ij}$ dado $\mathcal{H}_{ij}$ depende somente das $q$ observações anteriores
+  + Neste caso, $q$ é chamado de **ordem** do modelo
+
 ---
 
 # Estimação dos parâmetros do MLG
@@ -117,10 +146,6 @@ $r_i^{D} = \pm (y_i - \hat{\mu_i})\sqrt{\frac{2 \hat{\omega_i}}{\hat{\phi}}[y_i(
 
 ---
 
-# Contextualização
-
----
-
 # Modelos de Transição
 
 ---
@@ -141,4 +166,4 @@ $r_i^{D} = \pm (y_i - \hat{\mu_i})\sqrt{\frac{2 \hat{\omega_i}}{\hat{\phi}}[y_i(
 
 ---
 
-# Referências Bibliográficas
+# Referências e Link Úteis

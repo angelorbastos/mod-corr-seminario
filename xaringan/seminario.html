@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title></title>
+    <title>seminario.utf8</title>
     <meta charset="utf-8" />
     <link href="libs/remark-css/chocolate-fonts.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Abel|Biryani|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Biryani|Ubuntu+Condensed|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" type="text/css" />
   </head>
   <body>
@@ -13,27 +13,56 @@
 
 class: center, middle, inverse, title-slide
 
-&lt;h3 style = "font-family: Abel; vertical-align: top;"&gt;UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL&lt;/h4&gt;
+&lt;div&gt;
+  &lt;img src = "images/logo-ime.png" height = 75px width = 75px style = "position: absolute; left: 5px; top: 5px;"&gt;
+  &lt;p style = "position: absolute; font-family: Ubuntu Condensed; font-size: 20px; top: 23px; left: 50%; transform: translate(-50%, -50%);"&gt;MAT02035 - MODELOS PARA DADOS CORRELACIONADOS&lt;/p&gt;
+  &lt;img src = "images/logo-ufrgs.png" height = 75px width = 97px style = "position: absolute; right: 5px; top: 5px;"&gt;
+&lt;/div&gt;
 
-&lt;h1 id="h1-capa"&gt;Seminário:&lt;br/&gt;Modelos de Transição&lt;/h1&gt;
+&lt;h1 id="h1-capa"&gt;Modelos de Transição&lt;br&gt;(Modelos de Markov)&lt;/h1&gt;
 
-&lt;h1 id="h1-capa"&gt;Modelos para Dados Correlacionados (MAT02035)&lt;/h1&gt;
+&lt;div id = "texto-medio-esquerda"&gt; 
+  &lt;h4 style = "font-family: Abel"&gt;Angelo Rosa&lt;br&gt;Camila Leuck&lt;br&gt;Gabriel Grandemagne&lt;br&gt;Raquel Rossi&lt;br&gt;Vítor Coutinho&lt;/h4&gt;
+&lt;/div&gt;
 
-&lt;h3 style = "font-family: Abel;"&gt;Angelo Rosa, Camila Leuck, Gabriel dos Santos, Raquel Rossi e Vítor Coutinho&lt;/h3&gt;
+&lt;div id = "texto-medio-direita"&gt; 
+  &lt;h4 style = "font-family: Abel"&gt;&lt;br&gt;&lt;br&gt;Professor: Rodrigo Citton&lt;/h4&gt;
+&lt;/div&gt;
 
-&lt;h4 style = "font-family: Abel;"&gt;Atualizado em 17 de dezembro de 2019&lt;/h2&gt;
+&lt;div id="texto-baixo"&gt;
+  &lt;p style = "font-family: Ubuntu Condensed; font-size: 20px;"&gt;Atualizado em 18 de dezembro de 2019&lt;/p&gt;
+&lt;/div&gt;
 
 ---
 
 
 
-# Motivação
+# Introdução
 
-Nos estudos de dados longitudinais em que medidas são tomadas repetidamente sobre o mesmo indivíduo ao longo do tempo, há uma variação entre observações registradas entre indivíduos e dentro de um indivíduo.
+- Os modelos marginais não são suficientes para descrever toda informação de estudos longitudinais, apesar de permitirem a especificação de uma estrutura par a matriz de covariância
+  + Isto porque não captam todos os efeitos intra-indivíduos
 
-Quando os estudos são desenvolvidos considerando que a variável resposta não tem distribuição normal, geralmente a metodologia adequada para a análise é usar modelos lineares generalizados (MLGs).
+- Uma solução é considerar no modelo a dependência entre a observação de cada indivíduo amostrado em determinado tempo com suas observações passadas
 
-Os modelos de transição ou modelos de Markov, são aqueles nos quais qualquer resposta numa sequência de medidas repetidas é modelada condicionalmente sob um ou mais conjuntos de medições passadas. Basicamente caracterizam-se por apresentar uma relação de dependência da distribuição condicional da resposta atual sobre as respostas anteriores e as variáveis explicativas.
+- Neste seminário, consideraremos extensões de MLGs para descrever a distribuição condicional da resposta `\(y_{ij}\)` do indivíduo `\(i\)` no tempo `\(j\)` como uma função explícita de suas respostas nos tempos anteriores, dadas por `\(y_{ij-1},\,y_{ij-2},\,...,\,y_{i1}\)`, e das covariáveis `\(\textbf{x}_{ij}\)`
+
+---
+
+# Definições Importantes
+
+- Um **processo estocástico** é, de forma simplificada, um modelo matemático utilizado para analisar trajetórias (funções) de fenômenos aleatórios
+
+- Uma **cadeia de Markov** 
+
+---
+
+# Modelos de Markov
+
+- Denotaremos o histórico do sujeito `\(i\)` no tempo `\(j\)` por `\(\mathcal{H}_{ij}=\{y_{ik},\, k = 1,\,...,\,j-1\}\)`
+
+- Os modelos de transição mais úteis são cadeias de Markov em que a distribuição condicional de `\(y_{ij}\)` dado `\(\mathcal{H}_{ij}\)` depende somente das `\(q\)` observações anteriores
+  + Neste caso, `\(q\)` é chamado de **ordem** do modelo
+
 ---
 
 # Estimação dos parâmetros do MLG
@@ -122,7 +151,7 @@ Através de estudos de simulação de Monte Carlo a distribuição de resíduos 
 
 ---
 
-# Referências Bibliográficas
+# Referências e Link Úteis
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
