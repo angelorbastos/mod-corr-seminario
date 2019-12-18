@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>seminario.utf8</title>
+    <title></title>
     <meta charset="utf-8" />
     <link href="libs/remark-css/chocolate-fonts.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Abel|Biryani|Ubuntu+Condensed|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
@@ -150,6 +150,35 @@ Através de estudos de simulação de Monte Carlo a distribuição de resíduos 
 
 ---
 
+# Dados binários
+
+- Começamos com um modelo logístico para respostas binárias, tal que &lt;p style = "text-align: center;"&gt; `$$\begin {pmatrix} \pi_{00} &amp; \pi_{01} \\ \pi_{10} &amp; \pi_{11} \end{pmatrix},$$`&lt;/p&gt;
+onde `\(\pi_{ab} = \mathbb{P}(Y_{ij}=b|Y_{ij-1}=a),\space a,b=0,1\)`
+- Na configuração de regressão, modelamos a probabilidade da transição como função das covariáveis `\(x_{ij}=(1,x_{ij1},x_{ij2},\dots,x_{ijp})\)`. Assumimos que: &lt;p style = "text-align: center;"&gt; `$$\mathbb{logit} \space \mathbb{P}(Y_{ij}=1|Y_{ij-1}=0)=x'_{ij}\beta_0\,\,\text{ e }\,\, \mathbb{logit} \space \mathbb{P}(Y_{ij}=1|Y_{ij-1}=1)=x'_{ij}\beta_1,$$`&lt;/p&gt; onde `\(\beta_0\)` e `\(\beta_1\)` diferem.
+  + Em outras palavras esse modelo assume que os efeitos das variáveis explicativas muda dependendo na resposta prévia.
+
+---
+
+# Modelos de Transição - dados categóricos
+
+- Um modelo mais coerente pode ser descrito como: &lt;p style = "text-align: center;"&gt; `$$\mathbb{logit} \space \mathbb{P}(Y_{ij}=1|Y_{ij-1}=y_{ij-1}) = x'_{ij}\beta_0 + y_{ij-1}x'_{ij}\alpha,$$`&lt;/p&gt; 
+
+  para que `\(\beta_1=\beta_0 + \alpha\)`. A equação acima expressa duas regressões em um único modelo logístico que incluí os preditores das respostas prévias `\(y_{ij-1}\)` assim como a interação de `\(y_{ij-1}\)` com as variáveis explicativas.
+
+- Uma vantagem desse modelo é testar quando um modelo simples se ajusta corretamente aos dados, como por exemplo podemos testar quando `\(\alpha=(\alpha_0,0)\)`, então nosso modelo `\(y_{ij-1}x'_{ij}\alpha=\alpha_0Y_{ij-1}\)` implicando que a covariância tem o mesmo efeito na resposta quando `\(y_{ij-1}=0\)` ou `\(y_{ij-1}=1\)`.
+
+  + Testando se o `\(\alpha\)` está perto de 0, indica que a covariavel associada pode ser descartada do modelo.
+
+---
+
+# Modelos de Transição - dados categóricos
+
+- Analogamente, observando duas prévias medições no tempos temos que `$$\mathbb{logit}\,\mathbb{P}(Y_{ij}=1|Y_{ij-2}=y_{ij-2},\,Y_{ij-1}=y_{ij-1}) \\ = x'_{ij}\beta + y_{ij-1}x'_{ij}\alpha_1+y_{ij-2}x'_{ij}\alpha_2+y_{ij-1}y_{ij-2}x'_{ij}\alpha_3$$` 
+
+- Colocando valores diferentes para `\(y_{ij-2}\,\text{ e }\,y_{ij-1}\)` obtemos: &lt;p style = "text-align: center;"&gt; `\(\beta_{00}=\beta\)`; `\(\beta_{01}=\beta+\alpha_1\)`; `\(\beta_{10}=\beta+\alpha_2\)` e  `\(\beta_{11}=\beta+\alpha_1+\alpha_2+\alpha_3\)` &lt;/p&gt;
+
+---
+      
 # Modelando no R
 
 ---
