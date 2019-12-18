@@ -81,6 +81,14 @@ ler_libs(packages = c('leaflet', 'DT'))
 
 ---
 
+class: img-page
+
+<h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Modelos de Markov</h1>
+
+<i id = "img-center"><img src = "images/markov-icon.png" height = 350px width = 350px></i>
+
+---
+
 # Modelos de Markov
 
 - Denotaremos o **histórico** do sujeito $i$ no tempo $j$ por:
@@ -95,24 +103,85 @@ ler_libs(packages = c('leaflet', 'DT'))
 
 <p style = "text-align: center;">$$\mu_{ij}^{C}=\mathbb{E}(Y_{ij}|\mathcal{H}_{ij})=\psi'(\theta_{ij})\,\,\text{ e }\,\,v_{ij}^{C}=\mathbb{Var}(Y_{ij}|\mathcal{H}_{ij})=\psi''(\theta_{ij})\phi$$</p>
 
----
-
-# Modelos de Markov
-
-- Vamos considerar modelos em que a média e variância condicionais satisfazem:
-
-<p style = "text-align: center;">$$h(\mu_{ij}^C=x'_{ij}\beta+\sum_{r=1}^{s}f_r(\mathcal{H}_{ij};\alpha))$$</p>
-
----
-
-# Modelos de Markov - Observações
-
 - Os modelos de transição mais úteis são cadeias de Markov em que a distribuição condicional de $y_{ij}$ dado $\mathcal{H}_{ij}$ depende somente das $q$ observações anteriores
   + Neste caso, $q$ é chamado de **ordem** do modelo
 
 ---
 
-# Estimação dos parâmetros do MLG
+# Modelos de Markov
+
+- Vamos considerar modelos em que a média e variância condicionais satisfazem as equações abaixo, em que $h$ e $v$ são as funções de ligação e variância (**conhecidas** de acordo com a distribuição de $f(y_{ij}|\mathcal{H}_{ij})$):
+
+<p style = "text-align: center;">$$\begin{cases}h(\mu_{ij})^C=x'_{ij}\beta+\sum_{r=1}^{s}f_r(\mathcal{H}_{ij};\alpha)\text{,  para }f_r(\cdot)\text{ válidas;}\\v_{ij}^C=v(\mu_{ij}^C)\phi\end{cases}$$</p>
+
+- Expressando $\mu_{ij}^C$ como função tanto de $x_{ij}$ quanto de $y_{ij-1},\,\dots,\,y_{ij-q}$, estamos tratando as respostas anteriores de cada indivíduo como variáveis explicativas adicionais
+  + Presumimos que o passado afeta o futuro como uma soma de $s$ termos, cada um destes podendo depender de suas $q$ observações anteriores
+  
+---
+
+# Modelos de Markov - Exemplos
+
+- Um modelo de regressão linear com erros autorregressivos para dados Gaussianos é um modelo markoviano, de forma:
+
+<p style = "text-align: center;">$$Y_{ij}=x'_{ij}\beta+\sum_{r=1}^{q}\alpha_r(Y_{ij-r}-x'_{ij-r}\beta)+Z_{ij}$$</p>
+
+- Neste modelo, presumimos que os $Z_{ij}$ são independentes e têm distribuições Normais com médias zero
+
+- Este é um modelo de transição com $h(\mu_{ij}^C)=\mu_{ij}^C$, $v(\mu_{ij}^C)=1$ e $f_r=\alpha_r(y_{ij-r}-x'_{ij-r}\beta)$
+
+- Notar que a observação atual, $Y_{ij}$, é função linear tanto de $x_{ij}$ quanto de dos **desvios** anteriores, $Y_{ij-r}-x'_{ij-r}\beta,\,\,r=1,\,\dots,\,q$
+
+---
+# Modelos de Markov - Exemplos
+
+- Um modelo de regressão logístico para respostas binárias pode compôr uma cadeia de Markov, como abaixo:
+
+<p style = "text-align: center;">$$\mathbb{logit}\big(\mathbb{P}(Y_{ij}=1|\mathcal{H}_{ij})\big)=x'_{ij}\beta+\alpha y_{ij-1}$$</p>
+
+- Neste modelo, têm-se $h(\mu_{ij}^C)=\mathbb{logit}(\mu_{ij}^C)=\mathbb{log}\Big(\frac{\mu_{ij}^C}{1-\mu_{ij}^C}\Big)$, $v(\mu_{ij}^C)=\mu_{ij}^C(1-\mu_{ij}^C)$ e $f_r(\mathcal{H}_{ij},\alpha)=\alpha_ry_{ij-r},\,s=q=1$.
+
+- Pode-se extendê-lo a um modelo de ordem $q$:
+
+<p style = "text-align: center;">$$\mathbb{logit}\big(\mathbb{P}(Y_{ij}=1|\mathcal{H}_{ij})\big)=x'_{ij}\beta_q+\sum_{r=1}^{q}\alpha_ry_{ij-r}$$</p>
+
+- A notação $\beta_q$ indica que tanto o valor quanto interpretação dos coeficientes no vetor mudam com a ordem $q$ da cadeia de Markov
+
+---
+
+# Modelos de Markov - Exemplos
+
+- Com dados de contagem, pode-se ajustar um modelo log-linear onde $Y_{ij}|\mathcal{H}_{ij}\sim Poisson(\lambda)$:
+  + Tomando uma cadeia de Markov de primeira ordem onde $f_1=\alpha\{\mathbb{log}(y^*_{ij-1})-x'_{ij-1}\beta\}$, sendo $y^*_{ij}=\mathbb{max}(y_{ij},d),\,\,0<d<1$, podemos obter:
+  
+<p style = "text-align: center;">$$\mu_{ij}^C=\mathbb{E}(Y_{ij}|\mathcal{H}_{ij})=\mathbb{exp}(x1_{ij}\beta)\Big(\frac{y^*_{ij-1}}{\mathbb{exp}(x'_{ij-1}\beta)}\Big)^\alpha$$</p>
+
+- A constante $d$ previne que $y_{ij-1}=0$ vire um estado de absorção, onde $y_{ij-1}=0$ força todas respostas futuras a serem zero
+
+- Se $\alpha>0$, a média $\mu_{ij}^C$ cresce quando a observação anterior $y_{ij-1}>\mathbb{exp}(x'_{ij-1}\beta)$
+  + Se $\alpha<0$, um valor mais alto no tempo $t_{ij-1}$ causa um valor mais baixo em $t_{ij}$
+
+---
+
+# Modelos de Markov - Observação
+  
+- Para o modelo de regressão **linear**, pode-se formular o modelo de transição considerando $f_r=\alpha_r(y_{ij-r}-x'_{ij-1}\beta)$, o que leva a $\mathbb{E}(Y_{ij})=x'_{ij}\beta\,\,\,\forall q$
+
+- Para os casos logístico e log-linear, é complexo formular modelos que mantenham a interpretação de $\beta$ para diferentes presunções sobre a dependência temporal
+  
+- Então, quando $\beta$ é o foco científico do estudo, deve-se examinar a sensibilidade das estimativas relevantes com relação à escolha de modelo de dependência temporal
+  
+---
+
+class: img-page
+
+<h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Ajustando Modelos de Transição</h1>
+
+<i id = "img-center"><img src = "images/fitting-icon.png" height = 350px width = 350px></i>
+
+---
+
+# Ajustando Modelos de Transição
+
 O método proposto para estimação do vetor de parâmetros $\beta$ foi o da máxima verossimilhança. Considerando uma amostra aleatória de n observações de uma distribuição exponencial
 
 $f(y_i,\theta_i,\phi)=\mathbb{exp} \Big{\{} \frac{1}{a_i(\phi)}\big{[}y_i \theta_i - b(\theta_i)\big{]}+c(y_i,\phi) \Big{\}}$
@@ -127,7 +196,7 @@ $l( \theta_i , \phi ,y_i) =\sum_{i=1}^{n}\Big{\{} \frac{1}{a_i(\phi)}\big{[}y_i 
 
 ---
 
-# Estimação dos parâmetros do MLG
+# Ajustando Modelos de Transição
 
 Derivando a última função vista no slide passado em relação a $\beta_j$, obtém-se a função escore
 
@@ -141,7 +210,16 @@ Onde X é a matriz de especificação do modelo e W é a matriz diagonal de peso
 
 ---
 
-# Análise de resíduos e diagnósticos
+class: img-page
+
+<h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Análise de Resíduos e Diagnósticos</h1>
+
+<i id = "img-center"><img src = "images/residual-icon.png" height = 350px width = 350px></i>
+
+---
+
+# Análise de Resíduos e Diagnósticos
+
 As técnicas usadas são as mesmas dos modelos lineares clássicos, com resposta normal, tanto para as técnicas baseadas em testes de hipóteses como para as baseadas em recursos gráficos. Os resíduos mais usuais para análise e diagnósticos dos MLGs são:
 
 1) Resíduos de Pearson generalizados
@@ -152,7 +230,7 @@ Em que $\hat{\phi}$ é uma estimativa consistente para o parâmetro de dispersã
 
 ---
 
-# Análise de resíduos e diagnósticos
+# Análise de Resíduos e Diagnósticos
 
 2) Resíduos de Pearson generalizados padronizados internamente
 
@@ -162,7 +240,7 @@ Através de estudos de simulação de Monte Carlo a distribuição de resíduos 
 
 ---
 
-# Análise de resíduos e diagnósticos
+# Análise de Resíduos e Diagnósticos
 
 3) Componentes do desvio padronizados internamente
 
@@ -174,7 +252,15 @@ $r_i^{D} = \pm (y_i - \hat{\mu_i})\sqrt{\frac{2 \hat{\omega_i}}{\hat{\phi}}[y_i(
 
 ---
 
-# Dados binários
+class: img-page
+
+<h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Dados Categóricos</h1>
+
+<i id = "img-center"><img src = "images/categorical-icon.png" height = 350px width = 350px></i>
+
+---
+
+# Dados Categóricos
 
 - Começamos com um modelo logístico para respostas binárias, tal que <p style = "text-align: center;"> $$\begin {pmatrix} \pi_{00} & \pi_{01} \\ \pi_{10} & \pi_{11} \end{pmatrix},$$</p>
 onde $\pi_{ab} = \mathbb{P}(Y_{ij}=b|Y_{ij-1}=a),\space a,b=0,1$
@@ -183,7 +269,7 @@ onde $\pi_{ab} = \mathbb{P}(Y_{ij}=b|Y_{ij-1}=a),\space a,b=0,1$
 
 ---
 
-# Modelos de Transição - dados categóricos
+# Dados Categóricos
 
 - Um modelo mais coerente pode ser descrito como: <p style = "text-align: center;"> $$\mathbb{logit} \space \mathbb{P}(Y_{ij}=1|Y_{ij-1}=y_{ij-1}) = x'_{ij}\beta_0 + y_{ij-1}x'_{ij}\alpha,$$</p> 
 
@@ -195,7 +281,7 @@ onde $\pi_{ab} = \mathbb{P}(Y_{ij}=b|Y_{ij-1}=a),\space a,b=0,1$
 
 ---
 
-# Modelos de Transição - dados categóricos
+# Dados Categóricos
 
 - Analogamente, observando duas prévias medições no tempos temos que $$\mathbb{logit}\,\mathbb{P}(Y_{ij}=1|Y_{ij-2}=y_{ij-2},\,Y_{ij-1}=y_{ij-1}) \\ = x'_{ij}\beta + y_{ij-1}x'_{ij}\alpha_1+y_{ij-2}x'_{ij}\alpha_2+y_{ij-1}y_{ij-2}x'_{ij}\alpha_3$$ 
 
@@ -203,11 +289,27 @@ onde $\pi_{ab} = \mathbb{P}(Y_{ij}=b|Y_{ij-1}=a),\space a,b=0,1$
 
 ---
 
-# Modelando no R
+class: img-page
+
+<h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Dados de Contagem</h1>
+
+<i id = "img-center"><img src = "images/counting-icon.png" height = 350px width = 350px></i>
 
 ---
 
-# Exemplos
+# Dados de Contagem
+
+---
+
+class: img-page
+
+<h1 id="h1-capa" style = "font-family: Abel; text-align: center;">Modelando no R</h1>
+
+<i id = "img-center"><img src = "images/rstudio-logo.png" height = 350px width = 350px></i>
+
+---
+
+# Modelando no R
 
 ---
 
